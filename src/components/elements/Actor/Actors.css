@@ -30,6 +30,9 @@
 }
 
 @media screen and (max-width: 720px) {
+  .rmdb-actor .rmdb-navigation p {
+    font-size: 16px;
+  }
   .rmdb-actor {
     display: flex;
     flex-direction: column;

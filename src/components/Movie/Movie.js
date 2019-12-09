@@ -6,7 +6,7 @@ import MovieInfo from '../elements/MovieInfo/MovieInfo';
 import MovieInfoBar from '../elements/MovieInfoBar/MovieInfoBar';
 import MovieTrailers from '../elements/MovieTrailers/MovieTrailers';
 import FourColGrid from '../elements/FourColGrid/FourColGrid';
-import Actor from '../elements/Actor/Actor';
+import Actors from '../elements/Actor/Actors';
 import Spinner from '../elements/Spinner/Spinner';
 import './Movie.css';
 
@@ -55,17 +55,17 @@ const Movie = ({ match, location }) => {
     <div className="rmdb-movie">
       {movie && (
         <>
-          <Navigation movie={location.movieName || movie.title} />
+          <Navigation movie={movie.title || location.movieName} id={movie.id} />
           <MovieInfo movie={movie} directors={directors} actors={actors} />
           <MovieInfoBar movie={movie} />
           <MovieTrailers trailers={trailer} />
         </>
       )}
       {actors && (
-        <div className="rmdb-movie-grid-actors">
+        <div className="rmdb-movie-grid">
           <FourColGrid header="Actors" loading={loading}>
             {actors.map((element, i) => {
-              return <Actor key={i} actor={element} />;
+              return <Actors key={i} actor={element} movie={movie} clickable />;
             })}
           </FourColGrid>
         </div>
