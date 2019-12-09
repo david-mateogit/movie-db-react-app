@@ -1,8 +1,7 @@
 .rmdb-movieinfobar {
   width: 100%;
-  height: 105px;
+  height: 100%;
   background: #1c1c1c;
-  position: relative;
   padding: 25px 20px 0px 20px;
   box-sizing: border-box;
   font-family: 'Abel', sans-serif;
@@ -10,14 +9,21 @@
 }
 
 .rmdb-movieinfobar-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 1280px;
+  height: 100%;
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 10px;
   color: #fff;
 }
 
 .rmdb-movieinfobar-content-col {
-  float: left;
+  justify-content: center;
+  display: flex;
+  height: 100%;
   width: 33.33%;
   box-sizing: border-box;
   padding: 10px 20px 0 0;
@@ -25,7 +31,7 @@
 
 .rmdb-movieinfobar-info {
   padding: 5px 0 0 10px;
-  float: left;
+  height: 100%;
 }
 
 .fa-time,
