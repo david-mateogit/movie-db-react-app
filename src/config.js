@@ -1,14 +1,7 @@
 const API_URL = 'https://api.themoviedb.org/3/';
-let API_KEY;
-let API_ACCESS_TOKEN_V4;
 
-if (process.env.NODE_ENV !== 'production') {
-  API_KEY = process.env.REACT_APP_API_KEY;
-  API_ACCESS_TOKEN_V4 = process.env.REACT_APP_ACCESS_TOKEN_V4;
-} else {
-  API_KEY = process.env.API_KEY;
-  API_ACCESS_TOKEN_V4 = process.env.ACCESS_TOKEN_V4;
-}
+const API_KEY = process.env.REACT_APP_API_KEY;
+const API_ACCESS_TOKEN_V4 = process.env.REACT_APP_ACCESS_TOKEN_V4;
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 
