@@ -127,3 +127,10 @@ meter::-webkit-meter-even-less-good-value {
     right: 30px;
   }
 }
+
+@media screen and (min-width: 721px) {
+  .fa-film {
+    font-size: 40px;
+    right: 30px;
+  }
+}

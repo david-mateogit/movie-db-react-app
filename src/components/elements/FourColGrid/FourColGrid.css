@@ -2,13 +2,15 @@
   font-family: 'Abel', sans-serif;
   font-size: 42px;
   color: #cbcbcb;
+  padding-left: 20px;
 }
 
 .rmdb-grid-content {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
   grid-column-gap: 40px;
   grid-row-gap: 40px;
+  padding: 20px;
 }
 
 .rmdb-grid-element {
