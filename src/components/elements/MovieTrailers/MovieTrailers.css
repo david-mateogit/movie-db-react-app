@@ -1,0 +1,43 @@
+.rmdb-movietrailer {
+  width: 100%;
+  height: 225px;
+  background: #1c1c1c;
+  position: relative;
+  padding: 0px 20px 0px 20px;
+  box-sizing: border-box;
+  font-family: 'Abel', sans-serif;
+  font-size: 22px;
+}
+
+.rmdb-movietrailer-content {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.rmdb-movietrailer-content-col {
+  float: left;
+  width: 33.33%;
+  box-sizing: border-box;
+  padding: 10px 20px 0 0;
+}
+
+.rmdb-movietrailer-info {
+  padding: 5px 0 0 10px;
+  float: left;
+}
+
+@media screen and (max-width: 720px) {
+  .rmdb-movietrailer-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .rmdb-movietrailer-content-col {
+    width: 100%;
+  }
+  .rmdb-movietrailer-info {
+    padding: 0;
+    font-size: 12px;
+  }
+}

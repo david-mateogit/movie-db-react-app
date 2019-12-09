@@ -4,6 +4,7 @@ import { API_URL, API_KEY } from '../../config';
 import Navigation from '../elements/Navigation/Navigation';
 import MovieInfo from '../elements/MovieInfo/MovieInfo';
 import MovieInfoBar from '../elements/MovieInfoBar/MovieInfoBar';
+import MovieTrailers from '../elements/MovieTrailers/MovieTrailers';
 import FourColGrid from '../elements/FourColGrid/FourColGrid';
 import Actor from '../elements/Actor/Actor';
 import Spinner from '../elements/Spinner/Spinner';
@@ -11,6 +12,7 @@ import './Movie.css';
 
 const Movie = ({ match, location }) => {
   const [movie, setMovie] = useState(null);
+  const [trailer, setTrailer] = useState([]);
   const [actors, setActors] = useState(null);
   const [directors, setDirectors] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,15 @@ const Movie = ({ match, location }) => {
       setLoading(false);
     } else {
       setMovie(response);
+      const trailersURL = `${API_URL}movie/${match.params.movieId}/videos?api_key=${API_KEY}`;
       const movieURL = `${API_URL}movie/${match.params.movieId}/credits?api_key=${API_KEY}`;
+      const trailersResult = await fetch(trailersURL);
+      const movieTrailers = await trailersResult.json();
+      const trailers = movieTrailers.results.map(m => {
+        return { trailer: m.key, site: m.site };
+      });
+      console.log(trailers);
+      setTrailer(trailers);
       const actorResult = await fetch(movieURL);
       const movieCrew = await actorResult.json();
       const movieDirectors = movieCrew.crew.filter(member => {
@@ -48,6 +58,7 @@ const Movie = ({ match, location }) => {
           <Navigation movie={location.movieName || movie.title} />
           <MovieInfo movie={movie} directors={directors} actors={actors} />
           <MovieInfoBar movie={movie} />
+          <MovieTrailers trailers={trailer} />
         </>
       )}
       {actors && (
