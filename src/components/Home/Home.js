@@ -21,6 +21,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const [query, setQuery] = useState('');
 
   const fetchItems = async (endpoint, caller) => {
     const result = await fetch(endpoint);
@@ -55,11 +56,38 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-    fetchItems(endpoint, 'loadMore');
+    const localState = JSON.parse(localStorage.getItem('HomeState'));
+    const localSearch = JSON.parse(localStorage.getItem('SearchTerm'));
+    if (localSearch && localSearch.length > 1) {
+      setQuery(localSearch);
+    }
+    if (localState && localState.movies.length > 1) {
+      setMovies(localState.movies);
+      setHeroImage(localState.heroImage);
+      setLoading(localState.loading);
+      setCurrentPage(localState.currentPage);
+      setTotalPages(localState.totalPages);
+    } else {
+      setLoading(true);
+      const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+      fetchItems(endpoint, 'loadMore');
+    }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    const stateObject = {
+      movies,
+      heroImage,
+      loading,
+      currentPage,
+      totalPages,
+    };
+    if (searchTerm.length > 1) {
+      localStorage.setItem('SearchTerm', JSON.stringify(searchTerm));
+    }
+    localStorage.setItem('HomeState', JSON.stringify(stateObject));
+  }, [currentPage, heroImage, loading, movies, searchTerm, totalPages]);
 
   const searchItems = query => {
     let endpoint;
@@ -75,6 +103,19 @@ const Home = () => {
     fetchItems(endpoint, 'searchItems');
   };
 
+  const clearItems = async () => {
+    const localSearch = await JSON.parse(localStorage.getItem('SearchTerm'));
+    console.log(localSearch);
+    if (localSearch && localSearch.length > 1) {
+      await localStorage.setItem('SearchTerm', JSON.stringify(''));
+      setLoading(true);
+      setSearchTerm('');
+      setQuery('');
+      const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+      fetchItems(endpoint, 'searchItems');
+    }
+  };
+
   return (
     <div className="rmdb-home">
       <div>
@@ -85,11 +126,17 @@ const Home = () => {
             text={heroImage.overview}
           />
         )}
-        <SearchBar searchItems={searchItems} />
+        <SearchBar
+          searchItems={searchItems}
+          searchTerm={searchTerm}
+          clearItems={clearItems}
+        />
       </div>
       <div className="rmdb-home-grid">
         <FourColGrid
-          header={searchTerm ? 'Search Result' : 'Popular Movies'}
+          header={
+            searchTerm.length > 1 || query.length > 1   ? 'Search Result' : 'Popular Movies'
+          }
           loading={loading}
         >
           {movies.map((element, i) => {

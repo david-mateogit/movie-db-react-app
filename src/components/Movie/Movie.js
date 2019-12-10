@@ -31,7 +31,6 @@ const Movie = ({ match, location }) => {
       const trailers = movieTrailers.results.map(m => {
         return { trailer: m.key, site: m.site };
       });
-      console.log(trailers);
       setTrailer(trailers);
       const actorResult = await fetch(movieURL);
       const movieCrew = await actorResult.json();

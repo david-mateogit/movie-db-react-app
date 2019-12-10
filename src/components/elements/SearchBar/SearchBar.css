@@ -18,12 +18,34 @@
   position: relative;
   color: #fff;
 }
-
+.rmdb-searchbar-content form button {
+  background: #363636;
+  border: none;
+  width: 1px;
+  outline: none;
+  padding: 0;
+}
 .rmdb-fa-search {
   position: absolute;
   left: 20px;
   top: 12px;
   color: #fff;
+}
+
+.rmdb-fa-search:active {
+  color: rgb(172, 52, 52);
+}
+
+.rmdb-fa-trash {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  font-size: 40px;
+  color: #fff;
+}
+
+.rmdb-fa-trash:active {
+  color: rgb(172, 52, 52);
 }
 
 .rmdb-searchbar-input {
