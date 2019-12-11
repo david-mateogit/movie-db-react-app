@@ -23,35 +23,39 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [query, setQuery] = useState('');
 
-  const fetchItems = async (endpoint, caller) => {
-    const response = await (await fetch(endpoint)).json();
-
-    if (response.results) {
-      if (caller === 'searchItems') {
-        setMovies([...response.results]);
-        setHeroImage(response.results[0]);
-      } else if (caller === 'loadMore') {
-        setMovies([...movies, ...response.results]);
-        setHeroImage(heroImage || response.results[0]);
-      }
-    }
-
-    setLoading(false);
-    setCurrentPage(response.page);
-    setTotalPages(response.total_pages);
+  const createEndpoint = (type, loadMore, term) => {
+    return `${API_URL}${type}?api_key=${API_KEY}&language=en-US&page=${loadMore &&
+      currentPage + 1}&query=${term}`;
   };
 
-  const loadMoreItems = () => {
-    let endpoint = '';
-    setLoading(true);
-    if (searchTerm === '') {
-      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${currentPage +
-        1}`;
-    } else {
-      endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}&page=${currentPage +
-        1}`;
+  const fetchItems = async (endpoint, term) => {
+    try {
+      const response = await (await fetch(endpoint)).json();
+      if (term === 'search') {
+        if (searchTerm.length > 1) {
+          setMovies([...movies, ...response.results]);
+        } else {
+          setMovies([...response.results]);
+          setHeroImage(response.results[0]);
+        }
+      }
+
+      if (term === 'load') {
+        setMovies([...movies, ...response.results]);
+        setHeroImage(movies[0] || response.results[0]);
+      }
+
+      if (term === 'clear') {
+        setMovies([...response.results]);
+        setHeroImage(response.results[0]);
+      }
+
+      setLoading(false);
+      setCurrentPage(response.page);
+      setTotalPages(response.total_pages);
+    } catch (e) {
+      console.log('There was an error: ', e);
     }
-    fetchItems(endpoint, 'loadMore');
   };
 
   useEffect(() => {
@@ -68,8 +72,8 @@ const Home = () => {
       setTotalPages(localState.totalPages);
     } else {
       setLoading(true);
-      const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-      fetchItems(endpoint, 'loadMore');
+
+      fetchItems(createEndpoint('movie/popular', false, ''), 'load');
     }
     // eslint-disable-next-line
   }, []);
@@ -88,30 +92,26 @@ const Home = () => {
     localStorage.setItem('HomeState', JSON.stringify(stateObject));
   }, [currentPage, heroImage, loading, movies, searchTerm, totalPages]);
 
-  const searchItems = text => {
-    let endpoint;
+  const updateItems = (loadMore, text) => {
+    setMovies(loadMore ? [...movies] : []);
     setLoading(true);
-
-    setSearchTerm(text);
-    if (text.length === '') {
-      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+    setSearchTerm(loadMore ? searchTerm : text);
+    if (text || searchTerm.length > 1) {
+      fetchItems(
+        createEndpoint('search/movie', loadMore, text || searchTerm),
+        'search'
+      );
     } else {
-      endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${text}`;
+      fetchItems(createEndpoint('movie/popular', loadMore, ''), 'load');
     }
-
-    fetchItems(endpoint, 'searchItems');
   };
 
   const clearItems = async () => {
-    const localSearch = await JSON.parse(localStorage.getItem('SearchTerm'));
-    if (localSearch && localSearch.length > 1) {
-      await localStorage.setItem('SearchTerm', JSON.stringify(''));
-      setLoading(true);
-      setSearchTerm('');
-      setQuery('');
-      const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-      fetchItems(endpoint, 'searchItems');
-    }
+    localStorage.setItem('SearchTerm', JSON.stringify(''));
+    setLoading(true);
+    setSearchTerm('');
+    setQuery('');
+    fetchItems(createEndpoint('movie/popular', undefined, undefined), 'clear');
   };
 
   return (
@@ -124,12 +124,12 @@ const Home = () => {
             text={heroImage.overview}
           />
         )}
-        <SearchBar searchItems={searchItems} />
+        <SearchBar searchItems={updateItems} />
       </div>
       <div className="rmdb-home-grid">
         <FourColGrid
           header={
-            searchTerm.length > 1 || query.length > 1
+            (searchTerm && searchTerm.length > 1) || query.length > 1
               ? 'Search Results'
               : 'Popular Movies'
           }
@@ -154,7 +154,7 @@ const Home = () => {
         </FourColGrid>
         {loading ? <Spinner /> : null}
         {currentPage < totalPages && !loading ? (
-          <LoadMoreBtn loadMoreItems={loadMoreItems} text="Load More" />
+          <LoadMoreBtn loadMoreItems={updateItems} text="Load More" />
         ) : null}
       </div>
     </div>

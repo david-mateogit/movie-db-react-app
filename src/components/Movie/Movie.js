@@ -18,40 +18,47 @@ const Movie = ({ match, location }) => {
   const [loading, setLoading] = useState(false);
 
   const fetchItems = async endpoint => {
-    const result = await fetch(endpoint);
-    const response = await result.json();
-    if (response.status_code) {
-      setLoading(false);
-    } else {
-      setMovie(response);
-      const trailersURL = `${API_URL}movie/${match.params.movieId}/videos?api_key=${API_KEY}`;
-      const movieURL = `${API_URL}movie/${match.params.movieId}/credits?api_key=${API_KEY}`;
-      const trailersResult = await fetch(trailersURL);
-      const movieTrailers = await trailersResult.json();
-      const trailers =
-        movieTrailers.results &&
-        movieTrailers.results.map(m => {
-          return { trailer: m.key, site: m.site };
-        });
-      setTrailer(trailers);
-      const actorResult = await fetch(movieURL);
-      const movieCrew = await actorResult.json();
-      const movieDirectors =
-        movieCrew.crew &&
-        movieCrew.crew.filter(member => {
-          return member.job === 'Director';
-        });
+    try {
+      const response = await (await fetch(endpoint)).json();
+      if (response.status_code) {
+        setLoading(false);
+      } else {
+        setMovie(response);
 
-      setActors(movieCrew.cast);
-      setDirectors(movieDirectors);
-      setLoading(false);
-      const localObj = {
-        movie: response,
-        trailers,
-        actors: movieCrew.cast,
-        directors: movieDirectors,
-      };
-      localStorage.setItem(`${match.params.movieId}`, JSON.stringify(localObj));
+        const trailersEndpoint = `${API_URL}movie/${match.params.movieId}/videos?api_key=${API_KEY}`;
+        const movieTrailers = await (await fetch(trailersEndpoint)).json();
+        const trailers =
+          movieTrailers.results &&
+          movieTrailers.results.map(m => {
+            return { trailer: m.key, site: m.site };
+          });
+        setTrailer(trailers);
+
+        const creditsEndpoint = `${API_URL}movie/${match.params.movieId}/credits?api_key=${API_KEY}`;
+        const movieCrew = await (await fetch(creditsEndpoint)).json();
+        const movieDirectors =
+          movieCrew.crew &&
+          movieCrew.crew.filter(member => {
+            return member.job === 'Director';
+          });
+        setActors(movieCrew.cast);
+        setDirectors(movieDirectors);
+
+        setLoading(false);
+
+        const localObj = {
+          movie: response,
+          trailers,
+          actors: movieCrew.cast,
+          directors: movieDirectors,
+        };
+        localStorage.setItem(
+          `${match.params.movieId}`,
+          JSON.stringify(localObj)
+        );
+      }
+    } catch (e) {
+      console.log('There was an error: ', e);
     }
   };
 

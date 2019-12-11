@@ -8,8 +8,12 @@ const LoadMoreBtn = ({ loadMoreItems, text }) => {
       role="button"
       tabIndex={0}
       className="rmdb-loadmorebtn"
-      onClick={loadMoreItems}
-      onKeyPress={loadMoreItems}
+      onClick={() => {
+        return loadMoreItems(true);
+      }}
+      onKeyPress={() => {
+        return loadMoreItems(true);
+      }}
     >
       <p>{text}</p>
     </div>

@@ -10,7 +10,7 @@ const SearchBar = ({ searchItems }) => {
     e.preventDefault();
     setValue(value.trim());
     if (value.trim() === '') return;
-    searchItems(value);
+    searchItems(false, value);
     setValue('');
   };
 
