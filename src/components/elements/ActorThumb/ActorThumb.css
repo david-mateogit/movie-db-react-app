@@ -1,10 +1,9 @@
 .rmdb-actorthumb {
-  width: 1000px;
+  width: 500px;
 }
 .rmdb-actorthumb img {
   height: auto;
-  max-width: 100%;
-  max-height: 100%;
+  margin: 100px 10px 10px 80px;
   transition: all 0.3s;
   box-sizing: border-box;
 }

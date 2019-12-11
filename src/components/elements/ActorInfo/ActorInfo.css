@@ -18,8 +18,6 @@
 }
 
 .rmdb-actorinfo-content {
-  display: flex;
-  justify-content: space-around;
   max-width: 1280px;
   width: 100%;
   height: 100%;
