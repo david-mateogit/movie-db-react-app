@@ -105,7 +105,6 @@ const Home = () => {
 
   const clearItems = async () => {
     const localSearch = await JSON.parse(localStorage.getItem('SearchTerm'));
-    console.log(localSearch);
     if (localSearch && localSearch.length > 1) {
       await localStorage.setItem('SearchTerm', JSON.stringify(''));
       setLoading(true);
@@ -126,18 +125,17 @@ const Home = () => {
             text={heroImage.overview}
           />
         )}
-        <SearchBar
-          searchItems={searchItems}
-          searchTerm={searchTerm}
-          clearItems={clearItems}
-        />
+        <SearchBar searchItems={searchItems} />
       </div>
       <div className="rmdb-home-grid">
         <FourColGrid
           header={
-            searchTerm.length > 1 || query.length > 1   ? 'Search Result' : 'Popular Movies'
+            searchTerm.length > 1 || query.length > 1
+              ? 'Search Results'
+              : 'Popular Movies'
           }
           loading={loading}
+          clearItems={clearItems}
         >
           {movies.map((element, i) => {
             return (

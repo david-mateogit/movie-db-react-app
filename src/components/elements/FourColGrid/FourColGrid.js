@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 import './FourColGrid.css';
 
-const FourColGrid = ({ children, header, loading }) => {
+const FourColGrid = ({ children, header, loading, clearItems }) => {
   const renderElements = () => {
     const gridElements = children.map((element, i) => {
       return (
@@ -15,7 +16,17 @@ const FourColGrid = ({ children, header, loading }) => {
   };
   return (
     <div className="rmdb-grid">
-      {header && !loading ? <h1>{header}</h1> : null}
+      <div className="rmdb-header">
+        {header && !loading ? <h1>{header}</h1> : null}
+        {header && header === 'Search Results' ? (
+          <FontAwesome
+            className="rmdb-fa-trash"
+            name="trash"
+            size="2x"
+            onClick={clearItems}
+          />
+        ) : null}
+      </div>
       <div className="rmdb-grid-content">{renderElements()}</div>
     </div>
   );

@@ -3,22 +3,19 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import './SearchBar.css';
 
-const SearchBar = ({ searchItems, clearItems, searchTerm }) => {
-  const [value, setValue] = useState(searchTerm);
+const SearchBar = ({ searchItems }) => {
+  const [value, setValue] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     setValue(value.trim());
     if (value.trim() === '') return;
     searchItems(value);
+    setValue('');
   };
 
   const doSearch = val => {
     setValue(val);
-  };
-  const doClear = () => {
-    setValue('');
-    clearItems();
   };
 
   return (
@@ -45,17 +42,11 @@ const SearchBar = ({ searchItems, clearItems, searchTerm }) => {
             onChange={e => {
               return doSearch(e.target.value);
             }}
-            value={searchTerm || value}
+            value={value}
             autoComplete="off"
             required
           />
         </form>
-        <FontAwesome
-          className="rmdb-fa-trash"
-          name="trash"
-          size="2x"
-          onClick={doClear}
-        />
       </div>
     </div>
   );

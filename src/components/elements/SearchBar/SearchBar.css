@@ -36,18 +36,6 @@
   color: rgb(172, 52, 52);
 }
 
-.rmdb-fa-trash {
-  position: absolute;
-  right: 20px;
-  top: 12px;
-  font-size: 40px;
-  color: #fff;
-}
-
-.rmdb-fa-trash:active {
-  color: rgb(172, 52, 52);
-}
-
 .rmdb-searchbar-input {
   font-family: 'Abel', sans-serif;
   font-size: 38px;

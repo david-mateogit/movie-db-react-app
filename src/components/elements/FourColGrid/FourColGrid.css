@@ -20,6 +20,24 @@
   overflow: hidden;
 }
 
+.rmdb-header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0;
+  background: inherit;
+}
+
+.rmdb-fa-trash {
+  margin-left: 20px;
+  font-size: 40px;
+  color: #fff;
+}
+
+.rmdb-fa-trash:active {
+  color: rgb(172, 52, 52);
+}
+
 @keyframes animateGrid {
   from {
     opacity: 0;
@@ -43,5 +61,11 @@
 
   .rmdb-grid h1 {
     font-size: 22px;
+  }
+
+  .rmdb-fa-trash {
+    margin-left: 20px;
+    font-size: 28px;
+    color: #fff;
   }
 }
