@@ -85,9 +85,10 @@
 }
 
 .fa-film {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
+  margin-top: auto;
+  margin-bottom: 50px;
+  margin-left: -80px;
+  padding-right: 100px;
   color: #fff;
 }
 
