@@ -33,6 +33,7 @@
 .rmdb-actorinfo-text {
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
+  min-height: 450px;
   width: auto;
   padding: 20px;
   margin-left: 60px;

@@ -1,17 +1,22 @@
 .rmdb-header {
   width: 100%;
+  max-width: 1280px;
   height: auto;
-  background: #1c1c1c;
+  background: #141414;
   padding: 0 20px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 .rmdb-header-content {
+  display: flex;
+  background-color: #141414;
+  justify-content: space-between;
   max-width: 1280px;
+  width: 100%;
   min-height: 120px;
   height: auto;
   padding: 20px 0px;
-  margin: 0 auto;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -19,13 +24,12 @@
 .rmdb-logo {
   width: 300px;
   margin-top: 20px;
-  float: left;
 }
 
 .rmdb-tmdb-logo {
   width: 122px;
   margin-top: 25px;
-  float: right;
+  justify-self: end;
 }
 
 @media screen and (max-width: 500px) {
@@ -36,7 +40,7 @@
 
   .rmdb-tmdb-logo {
     display: inline-block;
-    width:80px;
+    width: 80px;
     margin-top: 0px;
   }
 

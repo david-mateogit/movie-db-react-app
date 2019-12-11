@@ -20,14 +20,6 @@
   overflow: hidden;
 }
 
-.rmdb-header {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  padding: 0;
-  background: inherit;
-}
-
 .rmdb-fa-trash {
   margin-left: 20px;
   font-size: 40px;

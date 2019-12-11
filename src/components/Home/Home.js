@@ -89,15 +89,15 @@ const Home = () => {
     localStorage.setItem('HomeState', JSON.stringify(stateObject));
   }, [currentPage, heroImage, loading, movies, searchTerm, totalPages]);
 
-  const searchItems = query => {
+  const searchItems = text => {
     let endpoint;
     setLoading(true);
 
-    setSearchTerm(query);
-    if (query.length === '') {
+    setSearchTerm(text);
+    if (text.length === '') {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
     } else {
-      endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${query}`;
+      endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${text}`;
     }
 
     fetchItems(endpoint, 'searchItems');

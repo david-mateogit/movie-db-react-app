@@ -28,25 +28,50 @@ const Movie = ({ match, location }) => {
       const movieURL = `${API_URL}movie/${match.params.movieId}/credits?api_key=${API_KEY}`;
       const trailersResult = await fetch(trailersURL);
       const movieTrailers = await trailersResult.json();
-      const trailers = movieTrailers.results.map(m => {
-        return { trailer: m.key, site: m.site };
-      });
+      const trailers =
+        movieTrailers.results &&
+        movieTrailers.results.map(m => {
+          return { trailer: m.key, site: m.site };
+        });
       setTrailer(trailers);
       const actorResult = await fetch(movieURL);
       const movieCrew = await actorResult.json();
-      const movieDirectors = movieCrew.crew.filter(member => {
-        return member.job === 'Director';
-      });
+      const movieDirectors =
+        movieCrew.crew &&
+        movieCrew.crew.filter(member => {
+          return member.job === 'Director';
+        });
       setActors(movieCrew.cast);
       setDirectors(movieDirectors);
       setLoading(false);
+      const localObj = {
+        movie: response,
+        trailers,
+        actors: movieCrew.cast,
+        directors: movieDirectors,
+      };
+      localStorage.setItem(`${match.params.movieId}`, JSON.stringify(localObj));
     }
   };
 
   useEffect(() => {
-    setLoading(true);
-    const endpoint = `${API_URL}movie/${match.params.movieId}?api_key=${API_KEY}&language=en-US`;
-    fetchItems(endpoint);
+    const localState = JSON.parse(
+      localStorage.getItem(`${match.params.movieId}`)
+    );
+
+    console.log(localState);
+    if (localState && localState.movie.title) {
+      setMovie(localState.movie);
+      setTrailer(localState.trailers);
+      setActors(localState.actors);
+      setDirectors(localState.directors);
+      setLoading(localState.loading);
+    } else {
+      setLoading(true);
+      const endpoint = `${API_URL}movie/${match.params.movieId}?api_key=${API_KEY}&language=en-US`;
+      fetchItems(endpoint);
+    }
+
     // eslint-disable-next-line
   }, [])
 

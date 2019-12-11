@@ -54,6 +54,5 @@ const SearchBar = ({ searchItems }) => {
 
 SearchBar.propTypes = {
   searchItems: PropTypes.func.isRequired,
-  clearItems: PropTypes.func.isRequired,
 };
 export default SearchBar;

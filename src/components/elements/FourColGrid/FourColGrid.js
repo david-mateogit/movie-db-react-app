@@ -17,14 +17,18 @@ const FourColGrid = ({ children, header, loading, clearItems }) => {
   return (
     <div className="rmdb-grid">
       <div className="rmdb-header">
-        {header && !loading ? <h1>{header}</h1> : null}
-        {header && header === 'Search Results' ? (
-          <FontAwesome
-            className="rmdb-fa-trash"
-            name="trash"
-            size="2x"
-            onClick={clearItems}
-          />
+        {header && !loading ? (
+          <h1>
+            {header}
+            {header && header === 'Search Results' ? (
+              <FontAwesome
+                className="rmdb-fa-trash"
+                name="trash"
+                size="2x"
+                onClick={clearItems}
+              />
+            ) : null}
+          </h1>
         ) : null}
       </div>
       <div className="rmdb-grid-content">{renderElements()}</div>
