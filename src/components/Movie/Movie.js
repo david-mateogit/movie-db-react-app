@@ -60,7 +60,7 @@ const Movie = ({ match, location }) => {
           <MovieTrailers trailers={trailer} />
         </>
       )}
-      {actors && (
+      {actors && actors.length > 1 && (
         <div className="rmdb-movie-grid">
           <FourColGrid header="Actors" loading={loading}>
             {actors.map((element, i) => {
