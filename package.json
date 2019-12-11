@@ -17,6 +17,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://movie-db-reactapp.netlify.com",
   "browserslist": {
     "production": [
       ">0.2%",

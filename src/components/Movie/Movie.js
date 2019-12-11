@@ -41,6 +41,7 @@ const Movie = ({ match, location }) => {
         movieCrew.crew.filter(member => {
           return member.job === 'Director';
         });
+
       setActors(movieCrew.cast);
       setDirectors(movieDirectors);
       setLoading(false);
@@ -58,8 +59,6 @@ const Movie = ({ match, location }) => {
     const localState = JSON.parse(
       localStorage.getItem(`${match.params.movieId}`)
     );
-
-    console.log(localState);
     if (localState && localState.movie.title) {
       setMovie(localState.movie);
       setTrailer(localState.trailers);

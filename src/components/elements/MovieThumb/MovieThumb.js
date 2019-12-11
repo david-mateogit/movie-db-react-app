@@ -5,7 +5,9 @@ import './MovieThumb.css';
 
 const MovieThumb = ({ image, clickable, movieId, movieName }) => {
   return (
-    <div className="rmdb-moviethumb">
+    <div
+      className={clickable ? 'rmdb-moviethumb-movie' : 'rmdb-moviethumb-solo'}
+    >
       {clickable ? (
         <Link to={{ pathname: `/${movieId}`, movieName: `${movieName}` }}>
           <img src={image} alt="moviethumb" />

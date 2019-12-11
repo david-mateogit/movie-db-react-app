@@ -24,8 +24,7 @@ const Home = () => {
   const [query, setQuery] = useState('');
 
   const fetchItems = async (endpoint, caller) => {
-    const result = await fetch(endpoint);
-    const response = await result.json();
+    const response = await (await fetch(endpoint)).json();
 
     if (response.results) {
       if (caller === 'searchItems') {
