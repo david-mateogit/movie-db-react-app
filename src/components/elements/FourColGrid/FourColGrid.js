@@ -16,7 +16,7 @@ const FourColGrid = ({ children, header, loading, clearItems }) => {
   };
   return (
     <div className="rmdb-grid">
-      <div className="rmdb-header">
+      <div className="rmdb-header-grid">
         {header && !loading ? (
           <h1>
             {header}

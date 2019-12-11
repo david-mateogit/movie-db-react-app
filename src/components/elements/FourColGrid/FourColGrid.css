@@ -2,7 +2,6 @@
   font-family: 'Abel', sans-serif;
   font-size: 42px;
   color: #cbcbcb;
-  padding-left: 20px;
 }
 
 .rmdb-grid-content {
@@ -53,6 +52,7 @@
 
   .rmdb-grid h1 {
     font-size: 22px;
+    padding-left: 10px;
   }
 
   .rmdb-fa-trash {
