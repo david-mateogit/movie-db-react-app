@@ -32,6 +32,7 @@
 @media screen and (max-width: 720px) {
   .rmdb-actor .rmdb-navigation p {
     font-size: 16px;
+    text-align: left;
   }
   .rmdb-actor {
     display: flex;

@@ -122,6 +122,9 @@ meter::-webkit-meter-even-less-good-value {
   .rmdb-movieinfo-text {
     position: unset;
   }
+  .rmdb-movieinfo-text h1 {
+    font-size: 26px;
+  }
   .fa-film {
     font-size: 50px;
     right: 30px;
