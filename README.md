@@ -1,8 +1,6 @@
 <p align="center">
   <h3 align="center">MovieDB React App</h3>
-
   <p align="center">
-    <br />
     <a href="https://movie-db-reactapp.netlify.com/">View Demo</a>
     ·
     <a href="https://github.com/david-mateogit/movie-db-react-app/issues">Report Bug</a>
@@ -29,6 +27,7 @@
 ## About The Project
 
 [![MovieDB React App][product-screenshot]](https://movie-db-reactapp.netlify.com/)
+
 This is a practice application using the Movie DB API, now updated with React Hooks, new routes and components and new techniques.
 
 ### Built With
