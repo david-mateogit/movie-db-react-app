@@ -1,7 +1,7 @@
 {
   "name": "movie-db-react-app",
   "version": "0.8.0",
-  "private": true,
+  "public": true,
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
