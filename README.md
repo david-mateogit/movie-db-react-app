@@ -1,12 +1,7 @@
-<br />
 <p align="center">
   <h3 align="center">MovieDB React App</h3>
 
   <p align="center">
-    This is a practice application using the Movie DB API, now updated with React Hooks, new routes and components and new techniques.
-    <br />
-    <a href="https://github.com/david-mateogit/movie-db-react-app"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://movie-db-reactapp.netlify.com/">View Demo</a>
     ·
@@ -34,6 +29,7 @@
 ## About The Project
 
 [![MovieDB React App][product-screenshot]](https://movie-db-reactapp.netlify.com/)
+This is a practice application using the Movie DB API, now updated with React Hooks, new routes and components and new techniques.
 
 ### Built With
 
@@ -76,7 +72,7 @@ npm install
 ```sh
 REACT_APP_API_URL=YOUR TMDB API URL
 REACT_APP_API_KEY=YOUR TMDB API KEY
-REACT_APP_ACCESS_TOKEN_V4 =YOUR TMDB ACCESS TOKEN
+REACT_APP_ACCESS_TOKEN_V4=YOUR TMDB ACCESS TOKEN
 ```
 
 <!-- USAGE EXAMPLES -->
