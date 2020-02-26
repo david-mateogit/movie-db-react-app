@@ -1,13 +1,9 @@
 <br />
 <p align="center">
-  <a href="https://github.com/david-mateogit/movie-db-react-app">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">MovieDB React App</h3>
 
   <p align="center">
-    This is a practice application using the Movie DB, now updated with React Hooks, new routes and components and new techniques.
+    This is a practice application using the Movie DB API, now updated with React Hooks, new routes and components and new techniques.
     <br />
     <a href="https://github.com/david-mateogit/movie-db-react-app"><strong>Explore the docs »</strong></a>
     <br />
